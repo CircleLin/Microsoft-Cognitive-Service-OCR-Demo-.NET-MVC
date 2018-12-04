@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Optical Character Recognition (OCR)";
+}
+
+<h2>Optical Character Recognition (OCR)</h2>
+
+    <form action="@Url.Action("Index")" method="post" enctype="multipart/form-data">     
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Upload Image</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse… <input type="file" name="file" id="imgInp">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                    <img id='img-upload' />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="submit" value="送出" class="btn btn-primary" />
+            </div>
+        </div>              
+    </form>
+
+
+@if (ViewBag.texts != null)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h4 style="color:dodgerblue"><b>@ViewBag.texts</b></h4>
+        </div>
+    </div>
+}
+
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+    </script>
+}
