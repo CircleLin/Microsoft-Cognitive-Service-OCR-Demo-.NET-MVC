@@ -17,6 +17,7 @@ namespace textmvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(HttpPostedFileBase file)
         {
             if (file != null)
@@ -36,7 +37,7 @@ namespace textmvc.Controllers
                     TextHandler textHandler = new TextHandler(path);
 
                     //Send Request to Computer Vision API by TextHandler
-                    TextJson data = await textHandler.MakeORCRequest();
+                    TextJson data = await textHandler.MakeORCRequest().ConfigureAwait(false);
 
                     if (data == null || data.regions.Count() == 0)
                     {

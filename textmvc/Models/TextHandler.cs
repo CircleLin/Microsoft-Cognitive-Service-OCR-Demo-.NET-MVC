@@ -53,12 +53,12 @@ namespace textmvc.Models
                     new MediaTypeHeaderValue("application/octet-stream");
                
                 //send post request
-                response = await client.PostAsync(uri, content);
+                response = await client.PostAsync(uri, content).ConfigureAwait(false);
             }
 
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                string data = await response.Content.ReadAsStringAsync();
+                string data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 //Deserialize to TextJson object
                 jsonData = JsonConvert.DeserializeObject<TextJson>(data);
